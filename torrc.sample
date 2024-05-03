@@ -1,0 +1,22 @@
+## Simple torrc for a hidden service
+## If you are serious about security, you should first read:
+## https://community.torproject.org/onion-services/advanced/
+## https://riseup.net/en/security/network-security/tor/onionservices-best-practices
+
+## log to stdout
+Log notice stdout
+
+## disable socks as this is a hidden service
+SocksPolicy reject *
+SocksPort 0
+
+## single hop mode (only only enable if you know what you are doing)
+# HiddenServiceSingleHopMode 1
+# HiddenServiceNonAnonymousMode 1
+
+## you should mount this in the container
+DataDirectory /var/lib/tor
+
+## hidden service configuration
+HiddenServiceDir /var/lib/tor/hidden_service/
+HiddenServicePort 80 some-service:80

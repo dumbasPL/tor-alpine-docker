@@ -1,0 +1,15 @@
+services:
+  tor:
+    image: dumbaspl/tor-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - tor_data:/var/lib/tor
+      - ./torrc.sample:/etc/tor/torrc:ro
+    depends_on:
+      - some-service
+  some-service:
+    image: nginx:alpine
+volumes:
+  tor_data:
